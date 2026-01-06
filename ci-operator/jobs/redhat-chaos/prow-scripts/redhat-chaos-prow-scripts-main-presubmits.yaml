@@ -5380,7 +5380,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build07
+    cluster: build01
     context: ci/prow/4.21-nightly-images
     decorate: true
     labels:
@@ -5436,7 +5436,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/4.21-nightly-krkn-hub-node-tests
     decorate: true
     labels:
@@ -5522,7 +5522,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/4.21-nightly-krkn-hub-node-tests-37nodes
     decorate: true
     labels:
@@ -5608,7 +5608,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build07
+    cluster: build01
     context: ci/prow/4.21-nightly-krkn-hub-node-tests-ibmcloud
     decorate: true
     labels:
@@ -5759,7 +5759,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/4.21-nightly-krkn-hub-syn-flood
     decorate: true
     labels:
@@ -5834,7 +5834,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/4.21-nightly-krkn-hub-tests
     decorate: true
     labels:
@@ -5920,7 +5920,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/4.21-nightly-krkn-hub-tests-37nodes
     decorate: true
     labels:
@@ -6006,7 +6006,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build07
+    cluster: build01
     context: ci/prow/4.21-nightly-krkn-hub-tests-ibmcloud
     decorate: true
     labels:
@@ -6152,215 +6152,6 @@ presubmits:
         secret:
           secretName: result-aggregator
     trigger: (?m)^/test( | .* )(4.21-nightly-krkn-hub-tests-nutanix|remaining-required),?($|\s.*)
-  - agent: kubernetes
-    always_run: false
-    branches:
-    - ^main$
-    - ^main-
-    cluster: build07
-    context: ci/prow/4.21-nightly-upgrade-chaos-azure-multi-upgrade-420to421-3nodes-node-scenarios
-    decorate: true
-    decoration_config:
-      skip_cloning: true
-    labels:
-      ci-operator.openshift.io/cloud: azure4
-      ci-operator.openshift.io/cloud-cluster-profile: azure-qe
-      ci-operator.openshift.io/variant: 4.21-nightly-upgrade
-      ci.openshift.io/generator: prowgen
-      pj-rehearse.openshift.io/can-be-rehearsed: "true"
-    name: pull-ci-redhat-chaos-prow-scripts-main-4.21-nightly-upgrade-chaos-azure-multi-upgrade-420to421-3nodes-node-scenarios
-    rerun_command: /test 4.21-nightly-upgrade-chaos-azure-multi-upgrade-420to421-3nodes-node-scenarios
-    spec:
-      containers:
-      - args:
-        - --gcs-upload-secret=/secrets/gcs/service-account.json
-        - --image-import-pull-secret=/etc/pull-secret/.dockerconfigjson
-        - --lease-server-credentials-file=/etc/boskos/credentials
-        - --report-credentials-file=/etc/report/credentials
-        - --secret-dir=/secrets/ci-pull-credentials
-        - --target=chaos-azure-multi-upgrade-420to421-3nodes-node-scenarios
-        - --variant=4.21-nightly-upgrade
-        command:
-        - ci-operator
-        image: quay-proxy.ci.openshift.org/openshift/ci:ci_ci-operator_latest
-        imagePullPolicy: Always
-        name: ""
-        resources:
-          requests:
-            cpu: 10m
-        volumeMounts:
-        - mountPath: /etc/boskos
-          name: boskos
-          readOnly: true
-        - mountPath: /secrets/ci-pull-credentials
-          name: ci-pull-credentials
-          readOnly: true
-        - mountPath: /secrets/gcs
-          name: gcs-credentials
-          readOnly: true
-        - mountPath: /secrets/manifest-tool
-          name: manifest-tool-local-pusher
-          readOnly: true
-        - mountPath: /etc/pull-secret
-          name: pull-secret
-          readOnly: true
-        - mountPath: /etc/report
-          name: result-aggregator
-          readOnly: true
-      serviceAccountName: ci-operator
-      volumes:
-      - name: boskos
-        secret:
-          items:
-          - key: credentials
-            path: credentials
-          secretName: boskos-credentials
-      - name: ci-pull-credentials
-        secret:
-          secretName: ci-pull-credentials
-      - name: manifest-tool-local-pusher
-        secret:
-          secretName: manifest-tool-local-pusher
-      - name: pull-secret
-        secret:
-          secretName: registry-pull-credentials
-      - name: result-aggregator
-        secret:
-          secretName: result-aggregator
-    trigger: (?m)^/test( | .* )(4.21-nightly-upgrade-chaos-azure-multi-upgrade-420to421-3nodes-node-scenarios|remaining-required),?($|\s.*)
-  - agent: kubernetes
-    always_run: false
-    branches:
-    - ^main$
-    - ^main-
-    cluster: build07
-    context: ci/prow/4.21-nightly-upgrade-chaos-azure-multi-upgrade-420to421-3nodes-pod-scenarios
-    decorate: true
-    decoration_config:
-      skip_cloning: true
-    labels:
-      ci-operator.openshift.io/cloud: azure4
-      ci-operator.openshift.io/cloud-cluster-profile: azure-qe
-      ci-operator.openshift.io/variant: 4.21-nightly-upgrade
-      ci.openshift.io/generator: prowgen
-      pj-rehearse.openshift.io/can-be-rehearsed: "true"
-    name: pull-ci-redhat-chaos-prow-scripts-main-4.21-nightly-upgrade-chaos-azure-multi-upgrade-420to421-3nodes-pod-scenarios
-    rerun_command: /test 4.21-nightly-upgrade-chaos-azure-multi-upgrade-420to421-3nodes-pod-scenarios
-    spec:
-      containers:
-      - args:
-        - --gcs-upload-secret=/secrets/gcs/service-account.json
-        - --image-import-pull-secret=/etc/pull-secret/.dockerconfigjson
-        - --lease-server-credentials-file=/etc/boskos/credentials
-        - --report-credentials-file=/etc/report/credentials
-        - --secret-dir=/secrets/ci-pull-credentials
-        - --target=chaos-azure-multi-upgrade-420to421-3nodes-pod-scenarios
-        - --variant=4.21-nightly-upgrade
-        command:
-        - ci-operator
-        image: quay-proxy.ci.openshift.org/openshift/ci:ci_ci-operator_latest
-        imagePullPolicy: Always
-        name: ""
-        resources:
-          requests:
-            cpu: 10m
-        volumeMounts:
-        - mountPath: /etc/boskos
-          name: boskos
-          readOnly: true
-        - mountPath: /secrets/ci-pull-credentials
-          name: ci-pull-credentials
-          readOnly: true
-        - mountPath: /secrets/gcs
-          name: gcs-credentials
-          readOnly: true
-        - mountPath: /secrets/manifest-tool
-          name: manifest-tool-local-pusher
-          readOnly: true
-        - mountPath: /etc/pull-secret
-          name: pull-secret
-          readOnly: true
-        - mountPath: /etc/report
-          name: result-aggregator
-          readOnly: true
-      serviceAccountName: ci-operator
-      volumes:
-      - name: boskos
-        secret:
-          items:
-          - key: credentials
-            path: credentials
-          secretName: boskos-credentials
-      - name: ci-pull-credentials
-        secret:
-          secretName: ci-pull-credentials
-      - name: manifest-tool-local-pusher
-        secret:
-          secretName: manifest-tool-local-pusher
-      - name: pull-secret
-        secret:
-          secretName: registry-pull-credentials
-      - name: result-aggregator
-        secret:
-          secretName: result-aggregator
-    trigger: (?m)^/test( | .* )(4.21-nightly-upgrade-chaos-azure-multi-upgrade-420to421-3nodes-pod-scenarios|remaining-required),?($|\s.*)
-  - agent: kubernetes
-    always_run: true
-    branches:
-    - ^main$
-    - ^main-
-    cluster: build07
-    context: ci/prow/4.21-nightly-upgrade-images
-    decorate: true
-    decoration_config:
-      skip_cloning: true
-    labels:
-      ci-operator.openshift.io/variant: 4.21-nightly-upgrade
-      ci.openshift.io/generator: prowgen
-      pj-rehearse.openshift.io/can-be-rehearsed: "true"
-    name: pull-ci-redhat-chaos-prow-scripts-main-4.21-nightly-upgrade-images
-    rerun_command: /test 4.21-nightly-upgrade-images
-    spec:
-      containers:
-      - args:
-        - --gcs-upload-secret=/secrets/gcs/service-account.json
-        - --image-import-pull-secret=/etc/pull-secret/.dockerconfigjson
-        - --report-credentials-file=/etc/report/credentials
-        - --target=[images]
-        - --variant=4.21-nightly-upgrade
-        command:
-        - ci-operator
-        image: quay-proxy.ci.openshift.org/openshift/ci:ci_ci-operator_latest
-        imagePullPolicy: Always
-        name: ""
-        resources:
-          requests:
-            cpu: 10m
-        volumeMounts:
-        - mountPath: /secrets/gcs
-          name: gcs-credentials
-          readOnly: true
-        - mountPath: /secrets/manifest-tool
-          name: manifest-tool-local-pusher
-          readOnly: true
-        - mountPath: /etc/pull-secret
-          name: pull-secret
-          readOnly: true
-        - mountPath: /etc/report
-          name: result-aggregator
-          readOnly: true
-      serviceAccountName: ci-operator
-      volumes:
-      - name: manifest-tool-local-pusher
-        secret:
-          secretName: manifest-tool-local-pusher
-      - name: pull-secret
-        secret:
-          secretName: registry-pull-credentials
-      - name: result-aggregator
-        secret:
-          secretName: result-aggregator
-    trigger: (?m)^/test( | .* )4.21-nightly-upgrade-images,?($|\s.*)
   - agent: kubernetes
     always_run: false
     branches:
@@ -6516,7 +6307,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build07
+    cluster: build01
     context: ci/prow/cr-4.17-nightly-images
     decorate: true
     labels:
@@ -6740,7 +6531,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build07
+    cluster: build01
     context: ci/prow/cr-4.21-nightly-images
     decorate: true
     labels:
@@ -6796,7 +6587,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build07
+    cluster: build01
     context: ci/prow/force-propagation-prow-scripts
     decorate: true
     decoration_config:
@@ -9034,7 +8825,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build07
+    cluster: build01
     context: ci/prow/rosa-4.21-nightly-images
     decorate: true
     decoration_config:
@@ -9092,7 +8883,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/rosa-4.21-nightly-krkn-rosa-hcp-node
     decorate: true
     decoration_config:
@@ -9180,7 +8971,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/rosa-4.21-nightly-krkn-tests-rosa
     decorate: true
     decoration_config:
@@ -9268,7 +9059,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/rosa-4.21-nightly-krkn-tests-rosa-hcp
     decorate: true
     decoration_config:
@@ -9356,7 +9147,7 @@ presubmits:
     branches:
     - ^main$
     - ^main-
-    cluster: build09
+    cluster: build07
     context: ci/prow/rosa-4.21-nightly-krkn-tests-rosa-node
     decorate: true
     decoration_config:
